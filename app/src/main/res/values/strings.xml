@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Mockup App</string>
+    <string name="full_name">Full Name</string>
+    <string name="department">Department</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="qualifications">Qualifications</string>
+    <string name="graduate">Graduate</string>
+    <string name="m_tech">M.Tech</string>
+    <string name="engineer">Engineer</string>
+    <string name="it">IT</string>
+    <string name="marketing">Marketing</string>
+    <string name="pgdba">PGDBA</string>
+    <string name="your_favourite_color">Your Favourite color</string>
+    <string name="number_of_pets">Number of pets</string>
+    <string name="enter_profile_information">Enter profile information ...</string>
+    <string name="date_birth">Date of birth</string>
+    <string name="submit">Submit</string>
+</resources>
