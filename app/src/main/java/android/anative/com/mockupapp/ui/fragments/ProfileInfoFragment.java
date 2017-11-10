@@ -10,6 +10,7 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -292,6 +293,7 @@ public class ProfileInfoFragment extends BaseFragment implements View.OnClickLis
     }
 
     private void clearData() {
+        Log.e("dfsfd","ZXvcsvxs");
         userName.setText(null);
         department.setText(null);
         date = null;
