@@ -2,6 +2,7 @@ package android.anative.com.mockupapp.ui.fragments;
 
 import android.anative.com.mockupapp.R;
 import android.anative.com.mockupapp.datbase.ProfileTable;
+import android.anative.com.mockupapp.ui.MainActivity;
 import android.anative.com.mockupapp.ui.dialogs.ConfirmationDialog;
 import android.anative.com.mockupapp.ui.dialogs.SelectionDialog;
 import android.anative.com.mockupapp.utilis.AppUtils;
@@ -55,6 +56,8 @@ public class ProfileInfoFragment extends BaseFragment implements View.OnClickLis
     String gender;
     ColorPicker colorPicker;
     FrameLayout colorBox;
+    int age;
+    private int currentyear;
 
     public static ProfileInfoFragment newInstance() {
 
@@ -207,6 +210,7 @@ public class ProfileInfoFragment extends BaseFragment implements View.OnClickLis
             case R.id.img_cal:
                 // TODO: 10/11/17
                 new DatePickerDialog(getActivity(), this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DATE)).show();
+                this.currentyear = calendar.get(Calendar.YEAR);
 
                 break;
             case R.id.colorBox:
@@ -293,7 +297,7 @@ public class ProfileInfoFragment extends BaseFragment implements View.OnClickLis
     }
 
     private void clearData() {
-        Log.e("dfsfd","ZXvcsvxs");
+        Log.e("dfsfd", "ZXvcsvxs");
         userName.setText(null);
         department.setText(null);
         date = null;
@@ -311,6 +315,7 @@ public class ProfileInfoFragment extends BaseFragment implements View.OnClickLis
         int day = datePicker.getDayOfMonth();
         date = day + " / " + month + " / " + year;
         txt_date.setText(date);
+        age = currentyear - year;
     }
 
     @Override
@@ -335,8 +340,10 @@ public class ProfileInfoFragment extends BaseFragment implements View.OnClickLis
         profileTable.setPets_count(txt_pets.getText().toString());
         profileTable.setAbout(commentBox.getText().toString());
         profileTable.setDate(txt_date.getText().toString());
+        profileTable.setAge("" + age);
         profileTable.save();
         clearData();
+        ((MainActivity) getActivity()).newEntry();
 
     }
 }

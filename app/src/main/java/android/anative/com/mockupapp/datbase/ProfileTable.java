@@ -12,6 +12,9 @@ import java.util.List;
  */
 @Table(name = "profile_table")
 public class ProfileTable extends Model {
+    public ProfileTable(){
+
+    }
     @Column(name = "_id")
     private long _id;
 
@@ -29,6 +32,17 @@ public class ProfileTable extends Model {
 
     @Column(name = "color_code")
     private int color;
+
+    @Column(name = "age")
+    private String age;
+
+    public String getAge() {
+        return age;
+    }
+
+    public void setAge(String  age) {
+        this.age = age;
+    }
 
     @Column(name = "pets_count")
     private String pets_count;

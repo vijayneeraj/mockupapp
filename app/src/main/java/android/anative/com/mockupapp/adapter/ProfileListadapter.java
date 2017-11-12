@@ -1,6 +1,7 @@
 package android.anative.com.mockupapp.adapter;
 
 import android.anative.com.mockupapp.R;
+import android.anative.com.mockupapp.datbase.ProfileTable;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
@@ -10,15 +11,24 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.List;
+
 /**
  * Created by Neeraj VijayVargiya on 10/11/17.
  */
 
 public class ProfileListadapter extends RecyclerView.Adapter<ProfileListadapter.MyViewHolder> {
     private Context context;
+    private List<ProfileTable> profileList;
+    private ProfileClickListener profileClickListener;
 
-    public ProfileListadapter(Context context) {
+    public void setProfileClickListener(ProfileClickListener profileClickListener) {
+        this.profileClickListener = profileClickListener;
+    }
+
+    public ProfileListadapter(Context context, List<ProfileTable> profileList) {
         this.context = context;
+        this.profileList = profileList;
     }
 
     @Override
@@ -34,7 +44,10 @@ public class ProfileListadapter extends RecyclerView.Adapter<ProfileListadapter.
 
     @Override
     public int getItemCount() {
-        return 5;
+        if (profileList.size()==0){
+            return 1;
+        }
+        return profileList.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -50,7 +63,7 @@ public class ProfileListadapter extends RecyclerView.Adapter<ProfileListadapter.
             ln_main = (LinearLayout) itemView.findViewById(R.id.ln_main);
         }
 
-        public void setData(int position) {
+        public void setData(final int position) {
             if (isEven(position)) {
                 ln_main.setBackgroundColor(context.getResources().getColor(R.color.colorGray));
             } else {
@@ -61,9 +74,21 @@ public class ProfileListadapter extends RecyclerView.Adapter<ProfileListadapter.
                 designation.setTypeface(designation.getTypeface(), Typeface.BOLD);
                 isEmploy.setTypeface(isEmploy.getTypeface(), Typeface.BOLD);
                 name.setTypeface(name.getTypeface(), Typeface.BOLD);
-                return;
+               // return;
+            } else {
+                age.setText(profileList.get(position).getAge());
+                designation.setText(profileList.get(position).getDepartment());
+                isEmploy.setText("Yes");
+                name.setText(profileList.get(position).getUser_name());
             }
-
+            ln_main.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (profileClickListener != null) {
+                        profileClickListener.onProfileClick(profileList.get(position));
+                    }
+                }
+            });
         }
     }
 
@@ -72,5 +97,9 @@ public class ProfileListadapter extends RecyclerView.Adapter<ProfileListadapter.
             return true;
         }
         return false;
+    }
+
+    public interface ProfileClickListener {
+        void onProfileClick(ProfileTable profileTable);
     }
 }
